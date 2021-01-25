@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  app:
+    build: docker/php-fpm
+    container_name: php-fpm.app
+    depends_on:
+      - web
+    restart: always
+    volumes:
+      - ./:/www/srv
+
+  web:
+    build: docker/nginx
+    container_name: nginx.app
+    ports:
+      - "8080:80"
+    restart: always
+    volumes:
+      - ./:/www/srv
+
+  mysql:
+    container_name: mysql.app
+    image: mysql:8.0.17
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/.mysql:/var/lib/mysql
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: "docker"
+      MYSQL_DATABASE: "framework"
+      MYSQL_USER: "docker"
+      MYSQL_PASSWORD: "docker"
+
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: rabbit.app
+    ports:
+      - "55672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "docker"
+      RABBITMQ_DEFAULT_PASS: "docker"
