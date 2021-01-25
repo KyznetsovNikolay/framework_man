@@ -1,7 +1,18 @@
 {
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.3.0",
+    "phpunit/phpunit": "^9.5"
+  },
   "autoload": {
     "psr-4": {
-      "Framework\\": "src/Framework"
+      "Framework\\": "src/Framework",
+      "Tests\\": "tests/"
     }
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
   }
 }
