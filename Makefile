@@ -5,7 +5,7 @@ up: docker-up
 down: docker-down
 
 .PHONY: init
-init: docker-down docker-pull docker-build docker-up composer-install load-fixtures node-assets-install
+init: docker-down docker-pull docker-build docker-up composer-install
 
 .PHONY: docker-up
 docker-up:

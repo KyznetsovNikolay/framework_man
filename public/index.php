@@ -3,13 +3,11 @@
 chdir(dirname(__DIR__));
 require_once 'vendor/autoload.php';
 
-use Framework\Http\Request;
+use Framework\Http\RequestFactory;
 
 ### Initialization
 
-$request = (new Request())
-        ->withQueryParams($_GET)
-        ->withParsedBody($_POST);
+$request = RequestFactory::fromGlobals();
 
 ### Action
 

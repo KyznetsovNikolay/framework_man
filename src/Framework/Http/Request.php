@@ -27,7 +27,7 @@ class Request
     {
         $new = clone $this;
         $new->parsedBody = $data;
-        return  $this;
+        return  $new;
     }
 
     public function withQueryParams(array $query): self
