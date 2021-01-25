@@ -22,4 +22,18 @@ class Request
     {
         return $this->parsedBody;
     }
+
+    public function withParsedBody($data): self
+    {
+        $new = clone $this;
+        $new->parsedBody = $data;
+        return  $this;
+    }
+
+    public function withQueryParams(array $query): self
+    {
+        $new = clone $this;
+        $new->queryParams = $query;
+        return $new;
+    }
 }
