@@ -3,16 +3,22 @@
 chdir(dirname(__DIR__));
 require_once 'vendor/autoload.php';
 
-use Framework\Http\Request;
+use Narrowspark\HttpEmitter\SapiEmitter;
+use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\ServerRequestFactory;
 
 ### Initialization
 
-$request = new Request();
+$request = ServerRequestFactory::fromGlobals();
 
 ### Action
 
 $name = $request->getQueryParams()['name'] ?? 'Guest';
-header('X-Developer: Kyznetsov');
 
-$name = $_GET['name'] ?? 'Guest';
-echo "Hello $name";
+$response = new HtmlResponse('Hello, ' . $name . '!');
+
+### Postprocessing
+
+$response = $response->withHeader('X-Developer', 'ElisDN');
+$emitter = new SapiEmitter();
+$emitter->emit($response);

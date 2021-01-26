@@ -36,3 +36,4 @@ RUN apt-get install -y libmagickwand-dev --no-install-recommends \
     && docker-php-ext-enable imagick
 
 ADD php.ini /usr/local/etc/php
+WORKDIR /www/srv
