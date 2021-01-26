@@ -3,18 +3,18 @@
 chdir(dirname(__DIR__));
 require_once 'vendor/autoload.php';
 
-use Framework\Http\RequestFactory;
-use Framework\Http\Response;
+use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\ServerRequestFactory;
 
 ### Initialization
 
-$request = RequestFactory::fromGlobals();
+$request = ServerRequestFactory::fromGlobals();
 
 ### Action
 
 $name = $request->getQueryParams()['name'] ?? 'Guest';
 
-$response = (new Response('Hello, ' . $name . '!'))
+$response = (new HtmlResponse('Hello, ' . $name . '!'))
     ->withHeader('X-Developer', 'Kyznetsov');
 
 ### Sending
